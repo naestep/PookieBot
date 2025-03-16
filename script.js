@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const obstaclesContainer = document.getElementById('obstacles');
     
     // Audio setup
-    let backgroundMusic = new Audio('oui.mp3');
+    let backgroundMusic = new Audio('music/oui.mp3');
     backgroundMusic.loop = true;
-    let explosionSound = new Audio('boom.mp3'); // Add explosion sound
+    let explosionSound = new Audio('music/boom.mp3'); // Add explosion sound
     let isMuted = false;
     let isSfxMuted = false; // Add SFX mute state
     
@@ -733,10 +733,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (currentLevel === 4) {
             // Use monkey.png for level 4
-            ballElement.style.backgroundImage = "url('monkey.png')";
+            ballElement.style.backgroundImage = "url('images/monkey.png')";
         } else {
             // Use nathan.png for all other levels
-            ballElement.style.backgroundImage = "url('nathan.png')";
+            ballElement.style.backgroundImage = "url('images/nathan.png')";
         }
         
         ballElement.style.backgroundSize = 'cover';
@@ -780,7 +780,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Use chloe image instead of green background
         targetElement.style.backgroundColor = 'transparent';
-        targetElement.style.backgroundImage = "url('chloe.png')";
+        targetElement.style.backgroundImage = "url('images/chloe.png')";
         targetElement.style.backgroundSize = 'cover';
         targetElement.style.backgroundPosition = 'center';
         
@@ -1162,7 +1162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Create the pizza image
         const imgElement = document.createElement('img');
-        imgElement.src = 'pizza-removebg-preview.png';
+        imgElement.src = 'images/pizza-removebg-preview.png';
         imgElement.style.width = '100%';
         imgElement.style.height = '100%';
         imgElement.style.objectFit = 'contain';
@@ -1331,7 +1331,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Create the carrot image
         const imgElement = document.createElement('img');
-        imgElement.src = 'carrot.png';
+        imgElement.src = 'images/carrot.png';
         imgElement.style.width = '100%';
         imgElement.style.height = '100%';
         imgElement.style.objectFit = 'contain';
@@ -1940,15 +1940,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Create explosion at position with size based on charge percentage
     function createExplosion(x, y, chargePercentage) {
-        // Play explosion sound if not muted
-        if (!isSfxMuted) {
-            // Create a new Audio instance each time to allow overlapping sounds
-            const boomSound = new Audio('boom.mp3');
-            boomSound.volume = 0.7 + (chargePercentage * 0.3); // Volume increases with charge (0.7 to 1.0)
-            boomSound.play().catch(error => {
-                console.log('Explosion sound playback failed:', error);
-            });
-        }
+        // Play explosion sound
+        const boomSound = new Audio('music/boom.mp3');
+        boomSound.volume = 0.7 + (chargePercentage * 0.3); // Volume increases with charge (0.7 to 1.0)
+        boomSound.play().catch(error => {
+            console.log('Explosion sound playback failed:', error);
+        });
         
         // Calculate explosion size based on charge percentage
         const explosionRadius = 30 + (maxExplosionRadius - 30) * chargePercentage;
@@ -2303,7 +2300,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Create the logo image
                 const logoImg = document.createElement('img');
-                logoImg.src = 'PookieBot_Logo.png';
+                logoImg.src = 'images/PookieBot_Logo.png';
                 logoImg.alt = 'Pookie Bot';
                 logoImg.style.maxWidth = '400px';
                 logoImg.style.display = 'block';
@@ -2322,7 +2319,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function addCloudBackground() {
         // Create first cloud
         const cloud1 = document.createElement('img');
-        cloud1.src = 'cloudbackground.png';
+        cloud1.src = 'images/cloudbackground.png';
         cloud1.className = 'cloud-background';
         cloud1.style.position = 'absolute';
         cloud1.style.top = '50px';
@@ -2335,7 +2332,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Create second cloud
         const cloud2 = document.createElement('img');
-        cloud2.src = 'cloudbackground.png';
+        cloud2.src = 'images/cloudbackground.png';
         cloud2.className = 'cloud-background';
         cloud2.style.position = 'absolute';
         cloud2.style.top = '200px';
@@ -2369,7 +2366,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add the compressed Pookie logo in the center
         const pookieLogo = document.createElement('img');
-        pookieLogo.src = 'Compressed_Pookie_Logo.png';
+        pookieLogo.src = 'images/Compressed_Pookie_Logo.png';
         pookieLogo.alt = 'Pookie Bot';
         pookieLogo.id = 'pookie-center-logo';
         pookieLogo.style.position = 'absolute';
@@ -2425,7 +2422,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Create the level icon with a negative margin to create overlap
         const levelIcon = document.createElement('img');
-        levelIcon.src = `level${level}.png`;
+        levelIcon.src = `images/level${level}.png`;
         levelIcon.alt = `Level ${level} Icon`;
         levelIcon.className = 'level-icon';
         levelIcon.style.width = '140px'; // Doubled from 70px

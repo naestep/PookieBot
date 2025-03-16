@@ -1,39 +1,55 @@
-# Simple Explosions Physics Simulation
+# PookieBot
 
-A fun interactive physics simulation where you can create explosions that affect a ball in a box.
+A fun physics-based puzzle game where you use explosions to guide PookieBot through five challenging levels.
 
-## Features
+## Game Overview
 
-- Ball with realistic gravity and physics
-- Click anywhere to create explosions
-- Explosions push the ball away
-- The closer to the ball you click, the stronger the explosion force
-- Realistic collision with walls and bouncing
+PookieBot is an engaging physics-based puzzle game where you control a ball character through a series of increasingly challenging levels. The game features:
 
-## How to Run
-
-Simply open the `index.html` file in any modern web browser.
+- 5 unique levels with different obstacles and challenges
+- Physics-based gameplay with realistic explosions and object interactions
+- Charming character designs including PookieBot and Chloe
+- Special obstacles like pizza slices, carrots, letters, and more
+- A special gold circle collectible in level 2
 
 ## How to Play
 
-1. The blue ball will start falling due to gravity
-2. Click anywhere in the box to create an explosion
-3. The explosion will push the ball away from the click point
-4. The closer you click to the ball, the stronger the force
+1. Select a level from the star-shaped level selection screen
+2. Click and hold anywhere in the game area to charge an explosion
+3. Release to create an explosion that will propel PookieBot
+4. Guide PookieBot to reach Chloe (the target) to complete each level
+5. Use the right amount of force and strategic positioning to navigate around obstacles
+
+## Controls
+
+- **Click and Hold**: Charge an explosion (longer hold = bigger explosion)
+- **Release**: Create the explosion
+- **Restart Button**: Reset the current level
+- **Back to Levels**: Return to the level selection screen
+- **Music Toggle**: Turn background music on/off
+- **SFX Toggle**: Turn sound effects on/off
+
+## Level Progression
+
+- **Level 1**: Introduction to basic mechanics
+- **Level 2**: Features a special gold circle collectible
+- **Level 3**: Introduces more complex obstacles
+- **Level 4**: Increased difficulty with strategic obstacle placement
+- **Level 5**: The ultimate challenge that tests all your skills
 
 ## Technologies Used
 
 - HTML5
 - CSS3
-- JavaScript (Vanilla)
+- JavaScript
+- Matter.js Physics Engine
 
-## Physics Implementation
+## File Structure
 
-The simulation implements:
-- Gravity
-- Friction
-- Bounce physics
-- Explosion forces
-- Wall collisions
+- `index.html`: Main game file
+- `script.js`: Game logic and physics
+- `styles.css`: Game styling
+- `images/`: Contains all game graphics and icons
+- `music/`: Contains background music and sound effects
 
-Enjoy playing with the physics simulation! 
+Enjoy playing PookieBot! 

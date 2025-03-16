@@ -1,6 +1,6 @@
 # PookieBot
 
-A fun physics-based puzzle game where you use explosions to guide PookieBot through five challenging levels.
+A fun physics-based puzzle game that I built for my girlfriend where you use explosions to guide a ball through five challenging levels.
 
 ## Game Overview
 

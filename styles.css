@@ -1,0 +1,406 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f0f5; /* Lighter pink background that complements the game's theme */
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Level Selection */
+#level-selection {
+    margin: 0 auto;
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: none;
+    min-height: 650px; /* Increased to match star container's new height */
+}
+
+/* Star-shaped level selection */
+#star-container {
+    position: relative;
+    width: 100%;
+    height: 650px; /* Match with level-selection */
+    margin: 0 auto;
+}
+
+#pookie-center-logo {
+    position: absolute;
+    left: 50%;
+    top: 57%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 18px rgba(252, 20, 143, 0.8)); /* Enhanced pink glow for better visibility at smaller size */
+}
+
+#pookie-center-logo:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+    filter: drop-shadow(0 0 22px rgba(252, 20, 143, 0.9)); /* Stronger glow on hover */
+}
+
+/* Level button container */
+.level-btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0; /* Remove the gap */
+    z-index: 2;
+}
+
+/* Level icons */
+.level-icon {
+    width: 140px; /* Doubled from 70px */
+    height: 140px; /* Doubled from 70px */
+    border: 4px solid #FC148F; /* Slightly thicker border to match larger size */
+    border-radius: 16px; /* Increased to match larger size */
+    padding: 8px; /* Increased to match larger size */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow for larger size */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+    object-fit: contain;
+    margin-bottom: -8px; /* Add negative margin to create overlap */
+}
+
+.level-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(252, 20, 143, 0.5);
+    background-color: rgba(255, 255, 255, 1); /* Fully white on hover */
+}
+
+.level-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.level-btn {
+    padding: 15px 25px;
+    font-size: 18px;
+    background-color: #FC148F;
+    color: white;
+    border: none;
+    border-radius: 50px; /* Make buttons round */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    min-width: 120px; /* Ensure consistent button size */
+    backdrop-filter: blur(5px); /* Add a subtle blur effect */
+    transform: scale(1); /* Add this to ensure proper transition */
+}
+
+.level-btn:hover {
+    background-color: #e6118a; /* Slightly darker on hover */
+    transform: scale(1.05) !important; /* Simplified transform with just a subtle scale */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Level button animations */
+@keyframes levelButtonPulse {
+    0% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        box-shadow: 0 6px 15px rgba(252, 20, 143, 0.5);
+    }
+    100% {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Game Box */
+#game-box {
+    width: 600px;
+    height: 400px;
+    background-color: #fff;
+    border: 3px solid #333;
+    margin: 0 auto 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#ball {
+    width: 50px;
+    height: 50px;
+    background-color: #3498db;
+    border-radius: 50%;
+    position: absolute;
+    top: 50px;
+    left: 275px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#target {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(76, 175, 80, 0.8); /* Brighter green */
+    border: 3px solid rgba(56, 142, 60, 0.9);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 50px;
+    right: 100px;
+    z-index: 5;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
+    animation: targetPulse 2s infinite ease-in-out;
+}
+
+.obstacle {
+    position: absolute;
+    background-color: #e74c3c;
+    border: 2px solid #c0392b;
+    z-index: 5;
+}
+
+.platform {
+    background-color: #8e44ad;
+    border: 2px solid #7d3c98;
+}
+
+.wooden-box {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: #d35400;
+    border: 2px solid #a04000;
+    background-image: linear-gradient(45deg, #d35400 25%, #e67e22 25%, #e67e22 50%, #d35400 50%, #d35400 75%, #e67e22 75%, #e67e22 100%);
+    background-size: 10px 10px;
+    z-index: 5;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transform-origin: center center;
+    transition: transform 0.05s linear;
+}
+
+@keyframes targetPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(46, 204, 113, 0.7);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+    }
+}
+
+@keyframes targetPulseDark {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
+}
+
+#level-complete {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 100;
+    display: none;
+    text-align: center;
+    width: 300px;
+}
+
+.level-complete-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.level-complete-buttons button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #FC148F;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.level-complete-buttons button:hover {
+    background-color: #D1107A; /* Darker shade of pink for hover */
+}
+
+.explosion {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.6);
+    pointer-events: none;
+    animation: explode 0.5s ease-out forwards;
+    z-index: 10;
+    border-radius: 50%;
+    transform-origin: center;
+    transform: scale(1);
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+.charge-indicator {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+    transition: width 0.1s, height 0.1s, background-color 0.2s;
+    box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
+    animation: pulse 1.2s infinite;
+    border-radius: 50%;
+    transform-origin: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.instructions {
+    background-color: #eee;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.instructions p {
+    margin-bottom: 10px;
+}
+
+.svg-obstacle {
+    position: absolute;
+    overflow: visible;
+    z-index: 10;
+    pointer-events: none;
+    background-color: transparent;
+    border: none;
+}
+
+.svg-obstacle img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(0,0,0,0.3));
+}
+
+.pizza-obstacle {
+    position: absolute;
+    overflow: visible;
+    z-index: 10;
+    pointer-events: none;
+    background-color: transparent;
+    border: none;
+}
+
+.pizza-obstacle img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(255,100,0,0.5));
+    image-rendering: -webkit-optimize-contrast;
+    backface-visibility: hidden;
+}
+
+@keyframes pizzaSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.letter-obstacle {
+    position: absolute;
+    background-color: #ff3b30; /* Red color for letters like in the image */
+    border: 2px solid #c0392b;
+    box-shadow: 0 0 10px rgba(255, 59, 48, 0.7);
+    z-index: 5;
+}
+
+.heart-obstacle {
+    position: absolute;
+    background-color: #e74c3c; /* Red color for heart */
+    border: 2px solid #c0392b;
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.7);
+    z-index: 6; /* Higher z-index to appear above letters */
+    border-radius: 50% 50% 50% 0; /* Shape the corners to look more like a heart */
+    transform: rotate(45deg); /* Rotate to create heart shape */
+    animation: heartbeat 1.5s infinite ease-in-out; /* Add heartbeat animation */
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: rotate(45deg) scale(1);
+    }
+    25% {
+        transform: rotate(45deg) scale(1.1);
+    }
+    50% {
+        transform: rotate(45deg) scale(1);
+    }
+    75% {
+        transform: rotate(45deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(45deg) scale(1);
+    }
+} 
